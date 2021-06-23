@@ -14,8 +14,17 @@
           color=#FFA07A
           v-on="on"
           v-bind="click"
+          @click="options = SIGNIN"
           >
           Signin</v-btn>
+
+        <v-btn
+          color=#FFA07A
+          v-on="on"
+          v-bind="click"
+          @click="options = SIGNUP"
+          >
+          Signup</v-btn>
         </v-app-bar></template>
 
         <v-card 
@@ -39,8 +48,11 @@
           </v-toolbar>
             </v-card-title>
 
-            <v-card-text>
-                <Signin></Signin>
+            <v-card-text v-if="options === SIGNIN">
+              <Signin></Signin>
+            </v-card-text>
+            <v-card-text v-if="options === SIGNUP">
+              <Signup></Signup>
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -48,17 +60,23 @@
 </template>
 
 <script>
-
 import Signin from '@/components/Signin.vue'
+import Signup from '@/components/Signup.vue'
+
+const SIGNIN = 0
+const SIGNUP = 1
 
 export default {
   data () {
     return {
       dialog: false,
+      SIGNIN,
+      SIGNUP,
+      options: '',
     }
   },
   components: {
-    Signin
-  }
+    Signin,Signup
+  },
 }
 </script>
